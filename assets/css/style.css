@@ -1,0 +1,270 @@
+.ninjadraw-app-preloading .ninjadraw-app-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+.ninjadraw-app-preloading .ninjadraw-header,
+.ninjadraw-app-preloading .ninjadraw-data {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  border: none;
+  background-color: lightgray;
+}
+.ninjadraw-app-preloading .ninjadraw-header::after,
+.ninjadraw-app-preloading .ninjadraw-data::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), color-stop(20%, rgba(255, 255, 255, 0.3)), color-stop(40%, rgba(255, 255, 255, 0.5)), color-stop(60%, rgba(255, 255, 255, 0.3)), color-stop(80%, rgba(255, 255, 255, 0)));
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 20%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.3) 60%, rgba(255, 255, 255, 0) 80%);
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-animation: ninjadraw-fx-skeleton-shimmer 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: ninjadraw-fx-skeleton-shimmer 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.ninjadraw-app-preloading .ninjadraw-header,
+.ninjadraw-app-preloading .ninjadraw-data {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.ninjadraw-app-preloading .ninjadraw-header {
+  position: relative;
+  height: 44px;
+  width: 300px;
+}
+.ninjadraw-app-preloading .ninjadraw-data {
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+@-webkit-keyframes ninjadraw-fx-skeleton-shimmer {
+  0% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
+@keyframes ninjadraw-fx-skeleton-shimmer {
+  0% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+#ninjadraw-app {
+  position: relative;
+  padding: 0 10px 0 0;
+  height: calc(100vh - 32px - 20px);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+@media screen and (max-width: 782px) {
+  #ninjadraw-app {
+    padding: 0 10px 0 0;
+    padding-left: 0;
+    height: calc(100vh - 46px - 20px);
+  }
+}
+
+.ninjadraw-app-container dd, .ninjadraw-app-container li,
+.ninjadraw-portal-container dd,
+.ninjadraw-portal-container li {
+  margin: unset;
+}
+.ninjadraw-app-container h1, .ninjadraw-app-container h2, .ninjadraw-app-container h3,
+.ninjadraw-portal-container h1,
+.ninjadraw-portal-container h2,
+.ninjadraw-portal-container h3 {
+  margin: unset;
+  padding: unset;
+}
+.ninjadraw-app-container button,
+.ninjadraw-portal-container button {
+  -webkit-margin-start: 0;
+  margin-inline-start: 0;
+  -webkit-margin-end: 0;
+  margin-inline-end: 0;
+}
+.ninjadraw-app-container p,
+.ninjadraw-portal-container p {
+  margin: unset;
+  padding: unset;
+  font-size: unset;
+  line-height: unset;
+}
+.ninjadraw-app-container a:focus,
+.ninjadraw-portal-container a:focus {
+  -webkit-box-shadow: unset;
+  box-shadow: unset;
+  outline: unset;
+}
+.ninjadraw-app-container input[type=number]:focus,
+.ninjadraw-portal-container input[type=number]:focus {
+  border-color: inherit;
+  outline: unset;
+}
+
+.ninjadraw-guide .ninjadraw-header {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px 0;
+}
+.ninjadraw-guide .ninjadraw-header .ninjadraw-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+.ninjadraw-guide .ninjadraw-header .ninjadraw-title span {
+  line-height: 1.3333333333;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #fff;
+}
+.ninjadraw-guide .ninjadraw-header .ninjadraw-title sup {
+  position: relative;
+  top: -0.75rem;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: none;
+  text-transform: uppercase;
+  vertical-align: baseline;
+}
+.ninjadraw-guide .ninjadraw-header .ninjadraw-title svg {
+  width: 40px;
+  height: 40px;
+}
+.ninjadraw-guide .ninjadraw-header .ninjadraw-title svg path {
+  fill: currentColor !important;
+}
+.ninjadraw-guide .ninjadraw-content {
+  min-width: 900px;
+  max-width: 900px;
+  position: relative;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 0px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 0px 1px rgba(0, 0, 0, 0.25);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.ninjadraw-guide .ninjadraw-content video {
+  display: block;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.7);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.ninjadraw-guide .ninjadraw-content h2,
+.ninjadraw-guide .ninjadraw-content h3,
+.ninjadraw-guide .ninjadraw-content p,
+.ninjadraw-guide .ninjadraw-content ul {
+  margin: 20px 0;
+}
+.ninjadraw-guide .ninjadraw-content h2,
+.ninjadraw-guide .ninjadraw-content h3 {
+  font-size: 17px;
+}
+.ninjadraw-guide .ninjadraw-content h2:first-child,
+.ninjadraw-guide .ninjadraw-content h3:first-child {
+  margin-top: 0;
+}
+.ninjadraw-guide .ninjadraw-content a,
+.ninjadraw-guide .ninjadraw-content p,
+.ninjadraw-guide .ninjadraw-content li {
+  font-size: 14px;
+}
+
+.ninjadraw-free [data-label=pro] {
+  position: relative;
+}
+
+.ninjadraw-free [data-label=pro]:after {
+  content: "pro";
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-transform: translate(2px, -2px);
+  transform: translate(2px, -2px);
+  color: #fff;
+  background: #fe9a00;
+  border-radius: 2px;
+  padding: 1px 2px;
+  font-family: monospace;
+  font-size: 9px;
+  line-height: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.fs-notice,
+.notice {
+  margin-left: 0 !important;
+  margin-right: 10px !important;
+}
+
+#wpcontent {
+  padding: 0 0 0 10px;
+  background: #f0f0f1;
+}
+
+#wpbody-content {
+  padding: 10px 0 10px 0;
+}
+
+#wpfooter {
+  display: none;
+}
+
+div[role=tree]:focus {
+  border: none;
+  outline: none;
+}
+
+.excalidraw.excalidraw-modal-container {
+  --zIndex-modal: 9999;
+}

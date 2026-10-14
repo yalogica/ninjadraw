@@ -1,0 +1,26 @@
+.ninjadraw {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 10px;
+}
+.ninjadraw .ninjadraw-image svg {
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+}
+.ninjadraw .ninjadraw-title {
+  text-align: center;
+}
+.ninjadraw.ninjadraw-ready .ninjadraw-image svg {
+  opacity: 1;
+}

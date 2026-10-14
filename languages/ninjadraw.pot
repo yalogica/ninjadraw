@@ -1,0 +1,425 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: NinjaDraw\n"
+"POT-Creation-Date: 2026-06-08 15:25+0300\n"
+"PO-Revision-Date: 2024-02-27 10:11+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: ninjadraw.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets\n"
+
+#: includes/Blocks/ImageBlock.php:26
+msgid "Light"
+msgstr ""
+
+#: includes/Blocks/ImageBlock.php:27
+msgid "Dark"
+msgstr ""
+
+#: includes/Models/AccessModel.php:41 includes/System/I18n.php:32
+#: includes/System/ListTable.php:240
+msgid "All"
+msgstr ""
+
+#: includes/Models/AccessModel.php:42 includes/System/I18n.php:33
+msgid "By Role"
+msgstr ""
+
+#: includes/Models/AccessModel.php:43 includes/System/I18n.php:34
+msgid "Private"
+msgstr ""
+
+#: includes/System/Admin.php:50
+msgid "NinjaDraw Diagrams"
+msgstr ""
+
+#: includes/System/Admin.php:51
+msgid "NinjaDraw Diagram"
+msgstr ""
+
+#: includes/System/Admin.php:76 includes/System/Admin.php:77
+#: includes/System/Admin.php:78 includes/System/Admin.php:79
+#: includes/System/Admin.php:81
+msgid "NinjaDraw"
+msgstr ""
+
+#: includes/System/Admin.php:77 includes/Views/items.php:14
+msgid "All Diagrams"
+msgstr ""
+
+#: includes/System/Admin.php:78 includes/Views/items.php:18
+msgid "Add New Diagram"
+msgstr ""
+
+#: includes/System/Admin.php:79 includes/System/I18n.php:27
+#: includes/System/I18n.php:45 includes/Views/settings.php:14
+msgid "Settings"
+msgstr ""
+
+#: includes/System/Admin.php:121 includes/System/Admin.php:125
+msgid "Sorry, you are not allowed to access this page."
+msgstr ""
+
+#: includes/System/Admin.php:190
+msgid "Thank you for using NinjaDraw!"
+msgstr ""
+
+#: includes/System/Admin.php:191
+msgid "You are currently on the Lite version."
+msgstr ""
+
+#: includes/System/Admin.php:194
+msgid "The Lite version includes these limitations:"
+msgstr ""
+
+#: includes/System/Admin.php:196
+msgid "You can create and edit up to 5 diagrams."
+msgstr ""
+
+#: includes/System/Admin.php:197
+msgid "Global plugin settings are disabled."
+msgstr ""
+
+#: includes/System/Admin.php:198
+msgid "Advanced user permissions are disabled."
+msgstr ""
+
+#: includes/System/Admin.php:202
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: includes/System/Admin.php:203
+msgid "Free vs Pro"
+msgstr ""
+
+#: includes/System/Admin.php:259
+msgid "The item doesn't exist or is in the wrong format."
+msgstr ""
+
+#: includes/System/I18n.php:14
+msgid "Network response was not ok"
+msgstr ""
+
+#: includes/System/I18n.php:15
+msgid "An unknown error occurred"
+msgstr ""
+
+#: includes/System/I18n.php:16
+msgid "The operation failed"
+msgstr ""
+
+#: includes/System/I18n.php:17
+msgid "The operation completed successfully"
+msgstr ""
+
+#: includes/System/I18n.php:18
+msgid "This is the pro feature."
+msgstr ""
+
+#: includes/System/I18n.php:18
+msgid "Upgrade to get the full power."
+msgstr ""
+
+#: includes/System/I18n.php:19
+msgid ""
+"You can create only 5 diagrams. If you need more, upgrade to the pro "
+"version."
+msgstr ""
+
+#: includes/System/I18n.php:20
+msgid "The ability to change and save settings is a pro feature."
+msgstr ""
+
+#: includes/System/I18n.php:21
+msgid ""
+"You are currently using the Lite version of our plugin. Please note that "
+"this version does not support saving global settings. To access this "
+"feature and enjoy additional functionality, please consider upgrading to "
+"the pro version."
+msgstr ""
+
+#: includes/System/I18n.php:22 includes/Views/settings.php:18
+msgid "Close"
+msgstr ""
+
+#: includes/System/I18n.php:23 includes/System/I18n.php:44
+msgid "Publish"
+msgstr ""
+
+#: includes/System/I18n.php:24
+msgid "Switch to draft"
+msgstr ""
+
+#: includes/System/I18n.php:25 includes/Views/settings.php:17
+msgid "Save"
+msgstr ""
+
+#: includes/System/I18n.php:28 includes/System/I18n.php:46
+#: includes/Views/item.php:14
+msgid "Diagram"
+msgstr ""
+
+#: includes/System/I18n.php:29
+msgid "Add title..."
+msgstr ""
+
+#: includes/System/I18n.php:30
+msgid "Permissions"
+msgstr ""
+
+#: includes/System/I18n.php:31
+msgid ""
+"Use this section to control who can view and edit NinjaDraw diagrams. You "
+"can choose from three distinct access types to tailor permissions for "
+"selected roles:"
+msgstr ""
+
+#: includes/System/I18n.php:35
+msgid ""
+"When this option is selected, users have the ability to view and edit all "
+"diagrams based on their rights (view, create, edit, delete, publish)."
+msgstr ""
+
+#: includes/System/I18n.php:36
+msgid ""
+"Users can view and edit diagrams based on their assigned role. For "
+"example, an editor can see diagrams created by other editors."
+msgstr ""
+
+#: includes/System/I18n.php:37
+msgid ""
+"This option ensures that only you, as the owner, can view and edit the "
+"diagrams. Rights are also taken into account."
+msgstr ""
+
+#: includes/System/I18n.php:38 includes/System/ListTable.php:211
+msgid "Role"
+msgstr ""
+
+#: includes/System/I18n.php:39
+msgid "Access Type"
+msgstr ""
+
+#: includes/System/I18n.php:40
+msgid "View"
+msgstr ""
+
+#: includes/System/I18n.php:41
+msgid "Create"
+msgstr ""
+
+#: includes/System/I18n.php:42 includes/System/I18n.php:48
+#: includes/System/ListTable.php:88
+msgid "Edit"
+msgstr ""
+
+#: includes/System/I18n.php:43
+msgid "Delete"
+msgstr ""
+
+#: includes/System/I18n.php:47
+msgid "Show Title"
+msgstr ""
+
+#: includes/System/I18n.php:49
+msgid "Congratulations!!!"
+msgstr ""
+
+#: includes/System/I18n.php:50
+msgid "You are using the NinjaDraw Pro version."
+msgstr ""
+
+#: includes/System/I18n.php:51
+msgid "Get NinjaDraw Pro"
+msgstr ""
+
+#: includes/System/I18n.php:52
+msgid "Unlock all features and premium support."
+msgstr ""
+
+#: includes/System/I18n.php:53
+msgid "YouTube Channel"
+msgstr ""
+
+#: includes/System/I18n.php:54
+msgid "Watch our video to learn about all the features of NinjaDraw."
+msgstr ""
+
+#: includes/System/I18n.php:55
+msgid "Support"
+msgstr ""
+
+#: includes/System/I18n.php:56
+msgid "Quickly get direct help from our qualified support team."
+msgstr ""
+
+#: includes/System/I18n.php:57
+msgid "Documentation"
+msgstr ""
+
+#: includes/System/I18n.php:58
+msgid ""
+"Explore our comprehensive knowledge base to easily navigate and master all "
+"plugin features."
+msgstr ""
+
+#: includes/System/I18n.php:59
+msgid "Suggest a Feature"
+msgstr ""
+
+#: includes/System/I18n.php:60
+msgid ""
+"Do you have ideas or suggestions for NinjaDraw? We would love to hear them."
+msgstr ""
+
+#: includes/System/I18n.php:61
+msgid "HappyVR"
+msgstr ""
+
+#: includes/System/I18n.php:62
+msgid ""
+"Creates immersive 360 virtual tours for WordPress for real estate, "
+"museums, hotels and etc."
+msgstr ""
+
+#: includes/System/I18n.php:63
+msgid "PicPoints"
+msgstr ""
+
+#: includes/System/I18n.php:64
+msgid ""
+"Generates interactive maps and multi-level floor plans for real estate, "
+"malls, resorts and etc."
+msgstr ""
+
+#: includes/System/I18n.php:65
+msgid "MediaCommander"
+msgstr ""
+
+#: includes/System/I18n.php:66
+msgid ""
+"Organizes media, posts, pages in WordPress with folders simply and quickly."
+msgstr ""
+
+#: includes/System/ListTable.php:40 includes/System/ListTable.php:243
+msgid "Draft"
+msgstr ""
+
+#: includes/System/ListTable.php:55 includes/System/ListTable.php:256
+msgid "Restore"
+msgstr ""
+
+#: includes/System/ListTable.php:68 includes/System/ListTable.php:257
+msgid "Delete Permanently"
+msgstr ""
+
+#: includes/System/ListTable.php:102 includes/System/ListTable.php:262
+msgid "Duplicate"
+msgstr ""
+
+#: includes/System/ListTable.php:116 includes/System/ListTable.php:265
+msgid "Move to Trash"
+msgstr ""
+
+#: includes/System/ListTable.php:140
+msgid "Copy to clipboard"
+msgstr ""
+
+#: includes/System/ListTable.php:207
+msgid "Title"
+msgstr ""
+
+#: includes/System/ListTable.php:208
+msgid "Shortcode"
+msgstr ""
+
+#: includes/System/ListTable.php:209
+msgid "Author"
+msgstr ""
+
+#: includes/System/ListTable.php:210
+msgid "Edited by"
+msgstr ""
+
+#: includes/System/ListTable.php:212
+msgid "Created"
+msgstr ""
+
+#: includes/System/ListTable.php:213
+msgid "Edited"
+msgstr ""
+
+#: includes/System/ListTable.php:241
+msgid "Mine"
+msgstr ""
+
+#: includes/System/ListTable.php:242
+msgid "Published"
+msgstr ""
+
+#: includes/System/ListTable.php:244
+msgid "Trash"
+msgstr ""
+
+#: includes/System/Shortcode.php:59
+msgid "NinjaDraw diagram is not selected."
+msgstr ""
+
+#: includes/System/Shortcode.php:64
+msgid "NinjaDraw diagram not found."
+msgstr ""
+
+#: includes/System/Shortcode.php:69
+msgid "NinjaDraw diagram image not found."
+msgstr ""
+
+#: includes/System/Shortcode.php:73
+msgid "NinjaDraw diagram has the wrong format."
+msgstr ""
+
+#: includes/Views/items.php:18
+msgid "Create a new diagram"
+msgstr ""
+
+#: includes/Views/items.php:25
+msgid "Search"
+msgstr ""
+
+#: vendor/freemius/wordpress-sdk/assets/js/pricing/freemius-pricing.js:2
+msgid "display"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "NinjaDraw - Create Diagrams, Sketches & Visual Workflows"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://yalogica.com/ninjadraw"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Drawing tool that allows you to create sketches and diagrams easily and "
+"intuitively"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Yalogica"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://yalogica.com"
+msgstr ""

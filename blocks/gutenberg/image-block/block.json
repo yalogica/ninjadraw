@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "version": "1.0.0",
+  "name": "ninjadraw/image-block",
+  "title": "NinjaDraw",
+  "category": "widgets",
+  "description": "Show sketches and diagrams",
+  "keywords": ["ninjadraw", "diagram", "sketch", "flowchart", "drawing"],
+  "textdomain": "ninjadraw",
+  "attributes": {
+    "itemId": { "type": "string", "default": "" },
+    "showTitle": { "type": "boolean", "default": true }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "style": [
+    "file:./style.css"
+  ],
+  "editorScript": "ninjadraw-image-block-editor",
+  "render": "php"
+}

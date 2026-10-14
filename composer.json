@@ -1,0 +1,23 @@
+{
+    "name": "yalogica/ninjadraw",
+    "autoload": {
+        "psr-4": {
+            "Yalogica\\NinjaDraw\\": "includes/"
+        }
+    },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../packages/wordpress-sdk-2.13.5",
+      "options": {
+        "symlink": false,
+        "versions": {
+          "freemius/wordpress-sdk": "2.13.5"
+        }
+      }
+    }
+  ],
+  "require": {
+    "freemius/wordpress-sdk": "^2.13.5"
+  }
+}

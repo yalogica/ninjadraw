@@ -1,0 +1,23 @@
+.ninjadraw {
+    display: flex;
+    position: relative;
+    margin: 0 auto;
+    flex-direction: column;
+    gap: 10px
+}
+
+.ninjadraw .ninjadraw-image svg {
+    transition: opacity .3s;
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0
+}
+
+.ninjadraw .ninjadraw-title {
+    text-align: center
+}
+
+.ninjadraw.ninjadraw-ready .ninjadraw-image svg {
+    opacity: 1
+}
