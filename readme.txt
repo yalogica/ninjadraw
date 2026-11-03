@@ -3,7 +3,7 @@ Contributors: yalogica, freemius
 Tags: diagram, flowchart, mind map, whiteboard, svg map
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 1.5.0
+Stable tag: 1.5.3
 Requires PHP: 7.4
 License: GPLv3 
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -114,13 +114,23 @@ Yes! NinjaDraw works seamlessly with Elementor, Gutenberg, Divi, Beaver Builder,
 Absolutely! Your diagrams adapt flawlessly to all screen sizes and mobile device layouts.  
 
 = Where is the developer version hosted? =  
-The open-source developer version is available on [GitHub](https://github.com/yalogica/ninjadraw-wordpress-plugin).
+The open-source developer version is available on [GitHub](https://github.com/yalogica/ninjadraw).
 
 = Is the NinjaDraw editor GDPR compliant? =  
 Yes! We don't collect, store, or track user data and drawings without consent. Everything stays on your server.
 
 
 == Changelog ==
+
+= 1.5.3 =
+* Fixed: Canvas background color was not included in the generated SVG, resulting in a transparent background on the frontend
+
+= 1.5.2 =
+* Fixed: Dismissing the upgrade admin notice now correctly saves the 30-day hidden period
+
+= 1.5.1 =
+* Fixed: Fatal error that could occur when both the free and Pro versions of the plugin were active at the same time
+* Changed: Removed the unused Composer autoloader, plugin classes are now loaded exclusively through the built-in autoloader
 
 = 1.5.0 =
 * Changed: Completely rebuilt the editor

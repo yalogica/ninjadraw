@@ -22344,49 +22344,50 @@ const DialogDescription = reactExports.forwardRef(({className: className, ...pro
 
 DialogDescription.displayName = DialogDescription$1.displayName;
 
+const DEFAULT_TITLE = "Unlock the full power of NinjaDraw";
+
 const DEFAULT_CONTEXT = "NinjaDraw PRO removes the limits and unlocks the full power of the editor.";
 
-const PRO_FEATURES = [ "Image Canvas Support", "Frame Tool", "Interactive Web Embeds", "Laser Pointer Tool", "Mermaid Import", "Native .excalidraw Files" ];
+const DEFAULT_FEATURES = [ "Image Canvas Support", "Frame Tool", "Interactive Web Embeds", "Laser Pointer Tool", "Mermaid Import", "Native .excalidraw Files" ];
 
-const PLANS = {
-  annual: {
-    label: "Annual",
-    price: "$39 / year",
-    note: "All PRO features, updates & support"
-  },
-  lifetime: {
-    label: "Lifetime",
-    price: "$69 one-time",
-    note: "Pay once, keep PRO forever"
+const buildUpgradeUrl = (intent, featureTitle) => {
+  const url = new URL(g.data.upgrade_url, window.location.href);
+  url.searchParams.set("utm_source", "ninjadraw-plugin");
+  url.searchParams.set("utm_medium", "upgrade-dialog");
+  url.searchParams.set("utm_campaign", "ninjadraw-pro");
+  if (featureTitle) {
+    url.searchParams.set("utm_content", featureTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""));
   }
+  if (intent === "trial") {
+    url.searchParams.set("trial", "true");
+  } else {
+    url.searchParams.delete("trial");
+  }
+  return url.toString();
 };
 
-const buildCheckoutUrl = (plan, trial) => {
-  const base = g.data.upgrade_url;
-  const params = new URLSearchParams({
-    billing_cycle: plan
-  });
-  if (trial) {
-    params.set("trial", "true");
-  }
-  return `${base}${base.includes("?") ? "&" : "?"}${params.toString()}`;
-};
-
-const DialogUpgradePro = ({featureText: featureText, onConfirm: onConfirm}) => {
+const DialogUpgradePro = ({featureTitle: featureTitle, featureText: featureText, features: features = DEFAULT_FEATURES, onConfirm: onConfirm}) => {
   const {closeDialog: closeDialog} = useDialogStore();
-  const [plan, setPlan] = reactExports.useState("annual");
-  const checkoutUrl = trial => buildCheckoutUrl(plan, trial);
-  const handleConfirm = () => {
-    closeDialog();
+  const title = featureTitle ?? DEFAULT_TITLE;
+  const trialUrl = buildUpgradeUrl("trial", featureTitle);
+  const plansUrl = buildUpgradeUrl("plans", featureTitle);
+  const handleNavigate = event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+      return;
+    }
     onConfirm?.();
-    window.location.href = checkoutUrl(true);
+    closeDialog();
   };
   /* @__PURE__ */
   return jsxRuntimeExports.jsx(Dialog$1, {
     open: true,
-    onOpenChange: open => !open && closeDialog(),
+    onOpenChange: open => {
+      if (!open) {
+        closeDialog();
+      }
+    },
     children: /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, {
-      className: "max-w-140 gap-0 p-7 sm:rounded-2xl",
+      className: "max-w-140 max-h-[90dvh] gap-0 overflow-y-auto p-7 sm:rounded-2xl",
       children: [ 
       /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, {
         className: "gap-3",
@@ -22395,13 +22396,9 @@ const DialogUpgradePro = ({featureText: featureText, onConfirm: onConfirm}) => {
           className: "inline-flex w-fit items-center rounded-full bg-[#f5f3ff] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#6d28d9]",
           children: "✦ NinjaDraw PRO"
         }), 
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogTitle, {
+        /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, {
           className: "text-[22px] font-bold leading-snug tracking-tight",
-          children: [ "Unlock ", 
-          /* @__PURE__ */ jsxRuntimeExports.jsx("em", {
-            className: "not-italic text-[#6d28d9]",
-            children: "premium features"
-          }), " with NinjaDraw PRO" ]
+          children: title
         }), 
         /* @__PURE__ */ jsxRuntimeExports.jsx(DialogDescription, {
           className: "text-[14.5px] leading-relaxed",
@@ -22416,11 +22413,11 @@ const DialogUpgradePro = ({featureText: featureText, onConfirm: onConfirm}) => {
           children: [ 
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", {
             className: "text-[12.5px] font-medium uppercase tracking-[0.08em] text-muted-foreground",
-            children: "Everything in Free, plus:"
+            children: "Included with PRO"
           }), 
           /* @__PURE__ */ jsxRuntimeExports.jsx("ul", {
             className: "grid grid-cols-1 gap-x-4 gap-y-2 min-[480px]:grid-cols-2",
-            children: PRO_FEATURES.map(feature => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", {
+            children: features.map(feature => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", {
               className: "flex items-start gap-2 text-[13.5px] leading-snug text-gray-700",
               children: [ 
               /* @__PURE__ */ jsxRuntimeExports.jsx(Check, {
@@ -22434,63 +22431,75 @@ const DialogUpgradePro = ({featureText: featureText, onConfirm: onConfirm}) => {
             }, feature))
           }) ]
         }), 
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
-          role: "radiogroup",
-          "aria-label": "Choose a plan",
-          className: "grid grid-cols-1 gap-3 sm:grid-cols-2",
-          children: Object.keys(PLANS).map(id => {
-            const p = PLANS[id];
-            const selected = plan === id;
-            /* @__PURE__ */
-            return jsxRuntimeExports.jsxs("label", {
-              className: cn("relative cursor-pointer rounded-xl border p-3.5 transition-colors", selected ? "border-[#6d28d9] bg-[#f5f3ff]" : "border-gray-200 hover:border-gray-300"),
-              children: [ 
-              /* @__PURE__ */ jsxRuntimeExports.jsx("input", {
-                type: "radio",
-                name: "njdrw-pro-plan",
-                className: "sr-only",
-                checked: selected,
-                onChange: () => setPlan(id)
-              }), id === "annual" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
-                className: "absolute -top-2.5 right-3 rounded-full bg-[#6d28d9] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white",
-                children: "Recommended"
-              }), 
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
-                className: "block text-sm font-semibold text-gray-900",
-                children: p.label
-              }), 
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
-                className: "mt-1 block text-base font-bold text-gray-900",
-                children: p.price
-              }), 
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
-                className: "mt-1 block text-xs text-muted-foreground",
-                children: p.note
-              }) ]
-            }, id);
-          })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+          className: "grid grid-cols-1 gap-3 min-[480px]:grid-cols-2",
+          children: [ 
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+            className: "relative rounded-xl border border-[#6d28d9] bg-[#f5f3ff] p-3.5",
+            children: [ 
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
+              className: "absolute -top-2.5 right-3 rounded-full bg-[#6d28d9] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white",
+              children: "Recommended"
+            }), 
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
+              className: "block text-xs font-medium text-muted-foreground",
+              children: "Annual"
+            }), 
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
+              className: "mt-1 block text-base font-bold text-gray-900",
+              children: "$39 / year"
+            }), 
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
+              className: "mt-1 block text-xs text-muted-foreground",
+              children: "Updates and support included"
+            }) ]
+          }), 
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+            className: "rounded-xl border border-gray-200 p-3.5",
+            children: [ 
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
+              className: "block text-xs font-medium text-muted-foreground",
+              children: "Lifetime"
+            }), 
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
+              className: "mt-1 block text-base font-bold text-gray-900",
+              children: "$69 one-time"
+            }), 
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
+              className: "mt-1 block text-xs text-muted-foreground",
+              children: "Pay once, keep PRO forever"
+            }) ]
+          }) ]
         }), 
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
           className: "flex flex-col gap-2",
           children: [ 
           /* @__PURE__ */ jsxRuntimeExports.jsx(Button$1, {
+            asChild: true,
             className: "h-auto w-full rounded-xl bg-[#6d28d9] px-4 py-3.5 text-[15.5px] font-bold text-white hover:bg-[#5b21b6]",
-            onClick: handleConfirm,
-            children: "Try PRO free for 7 days"
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", {
+              href: trialUrl,
+              target: "_blank",
+              rel: "noopener noreferrer",
+              onClick: handleNavigate,
+              children: "Start your 7-day free trial"
+            })
           }), 
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", {
             className: "text-center text-xs text-muted-foreground",
-            children: "No credit card required · Full PRO access · Cancel anytime"
+            children: "No credit card required · Opens in a new tab"
           }) ]
         }), 
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", {
           className: "text-center text-[13px] text-gray-600",
-          children: [ "Prefer to buy outright?", " ", 
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("a", {
-            href: checkoutUrl(false),
-            onClick: onConfirm,
+          children: [ "Ready to upgrade now?", " ", 
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", {
+            href: plansUrl,
+            target: "_blank",
+            rel: "noopener noreferrer",
             className: "font-bold text-[#6d28d9] hover:underline",
-            children: [ "Get PRO - ", PLANS[plan].price ]
+            onClick: handleNavigate,
+            children: "View plans and pricing"
           }) ]
         }), 
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", {
@@ -86055,7 +86064,7 @@ const Service = /* @__PURE__ */ (() => {
               elements: elements,
               appState: {
                 ...appState,
-                exportBackground: false
+                exportBackground: true
               },
               files: filesMap
             });

@@ -915,6 +915,10 @@
   height: 100%;
 }
 
+.njdrw .max-h-\[90dvh\] {
+  max-height: 90dvh;
+}
+
 .njdrw .min-h-7 {
   min-height: calc(var(--spacing) * 7);
 }
@@ -1200,6 +1204,10 @@
 
 .njdrw .overflow-hidden {
   overflow: hidden;
+}
+
+.njdrw .overflow-y-auto {
+  overflow-y: auto;
 }
 
 .njdrw .rounded {
