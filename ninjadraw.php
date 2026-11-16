@@ -3,7 +3,7 @@
  * Plugin Name:       NinjaDraw - Diagram, Flowchart, Mind Map & Sketching Tool
  * Plugin URI:        https://yalogica.com/ninjadraw
  * Description:       Drawing tool that allows you to create sketches and diagrams easily and intuitively
- * Version:           1.5.3
+ * Version:           1.6.1
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            Yalogica
@@ -32,7 +32,7 @@ if (
 }
 
 define('NINJADRAW_PLUGIN_NAME', 'ninjadraw');
-define('NINJADRAW_PLUGIN_VERSION', '1.5.3');
+define('NINJADRAW_PLUGIN_VERSION', '1.6.1');
 define('NINJADRAW_PLUGIN_BASE_NAME', plugin_basename(__FILE__));
 define('NINJADRAW_PLUGIN_PATH', __DIR__);
 define('NINJADRAW_PLUGIN_URL', plugin_dir_url(__FILE__));

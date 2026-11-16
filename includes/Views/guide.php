@@ -22,7 +22,7 @@ use Yalogica\NinjaDraw\Models\DataModel;
       <li>Click "Save" to store the diagram and "Publish" to make it available for use. It is now ready to be embedded anywhere on your site.</li>
     </ol>
     
-    <h2>Publish with a shortcode</h2>
+    <h2>Publish a diagram with a shortcode</h2>
     <ol>
       <li>On the All Diagrams list, locate the "Shortcode" column and copy the code for your diagram, e.g. [ninjadraw id="123"].</li>
       <li>Paste the shortcode into any post, page, or widget area that supports shortcodes.</li>
@@ -36,7 +36,70 @@ use Yalogica\NinjaDraw\Models\DataModel;
       <li><code>class</code> - a custom CSS class for styling the diagram container</li>
     </ul>
 
+    <h2>Publish as a presentation</h2>
+
+    <p>NinjaDraw can display diagram frames as presentation slides. The slide order and transition settings are configured in the Presentation panel of the diagram editor.</p>
+
+    <ol>
+      <li>Open a diagram in the NinjaDraw editor.</li>
+      <li>Create one or more frames on the canvas. Each frame becomes a presentation slide.</li>
+      <li>Open the Presentation panel and arrange the frames in the required order.</li>
+      <li>Configure looping, clipping, transition type, and animation effects.</li>
+      <li>Save and publish the diagram.</li>
+      <li>Open the WordPress post or page where the presentation should appear.</li>
+      <li>Add a Shortcode block and paste the presentation shortcode.</li>
+      <li>Save or update the page.</li>
+    </ol>
+
+    <p>
+      Example:
+      <code>[ninjadraw id="123" type="presentation" width="100%" height="600px"]</code>
+    </p>
+
+    <p>Presentation shortcode attributes:</p>
+
+    <ul>
+      <li>
+        <code>id</code> — the NinjaDraw diagram ID. This attribute is required.
+      </li>
+      <li>
+        <code>type</code> — set to <code>"presentation"</code> to enable presentation mode.
+      </li>
+      <li>
+        <code>width</code> — presentation container width. The default value is <code>"100%"</code>.
+      </li>
+      <li>
+        <code>height</code> — presentation container height. The default value is <code>"400px"</code>.
+      </li>
+      <li>
+        <code>title</code> — set to <code>"true"</code> to display the diagram title below the presentation.
+      </li>
+      <li>
+        <code>class</code> — an optional custom CSS class added to the presentation container.
+      </li>
+    </ul>
+
+    <p>
+      Supported size units:
+      <code>px</code>,
+      <code>%</code>,
+      <code>rem</code>,
+      <code>em</code>,
+      <code>vw</code>,
+      <code>vh</code>,
+      <code>vmin</code>, and
+      <code>vmax</code>.
+    </p>
+
+    <p>
+      Full example:
+      <code>[ninjadraw id="123" type="presentation" width="80vw" height="70vh" class="my-presentation"]</code>
+    </p>
+
     <h2>Publish with the Gutenberg block</h2>
+
+    <p>The NinjaDraw Gutenberg block displays regular diagrams. To embed a presentation, use the presentation shortcode shown above.</p>
+
     <ol>
       <li>Open any post or page in the block editor</li>
       <li>Add a new block and search for "NinjaDraw"</li>

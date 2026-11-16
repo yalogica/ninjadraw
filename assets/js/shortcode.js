@@ -8,7 +8,7 @@
     var imageNode = node.querySelector('.ninjadraw-image');
     if (!imageNode) return;
 
-    var config = window.NinjaDrawShortcode;
+    var config = window.yalogica_ninjadraw_global;
 
     fetch(config.api.public_url + '/images/' + node.dataset.id)
       .then(function (response) { return response.json(); })

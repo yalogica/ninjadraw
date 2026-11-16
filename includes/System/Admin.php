@@ -300,7 +300,8 @@ class Admin
       'data' => $data,
       'api' => [
         'nonce' => wp_create_nonce('wp_rest'),
-        'url' => esc_url_raw(rest_url(NINJADRAW_PLUGIN_REST_URL))
+        'url' => esc_url_raw(rest_url(NINJADRAW_PLUGIN_REST_URL)),
+        'public_url' => esc_url_raw(rest_url(NINJADRAW_PLUGIN_PUBLIC_REST_URL)),
       ]
     ];
   }

@@ -144,8 +144,40 @@ class DataController
         [
           "methods" => \WP_REST_Server::READABLE,
           "callback" => [$this, "getImage"],
-          "permission_callback" => "__return_true"
+          "permission_callback" => "__return_true",
+          'args' => [
+            'id' => [
+              'type' => 'integer',
+              'required' => true,
+              'sanitize_callback' => 'absint',
+              'validate_callback' => static function ($value) {
+                return is_numeric($value) && intval($value, 10) > 0;
+              },
+            ],
+          ],
         ]
+      ]
+    );
+
+    register_rest_route(
+      NINJADRAW_PLUGIN_PUBLIC_REST_URL,
+      '/presentations/(?P<id>\d+)',
+      [
+        [
+          'methods' => \WP_REST_Server::READABLE,
+          'callback' => [$this, 'getPresentation'],
+          'permission_callback' => '__return_true',
+          'args' => [
+            'id' => [
+              'type' => 'integer',
+              'required' => true,
+              'sanitize_callback' => 'absint',
+              'validate_callback' => static function ($value) {
+                return is_numeric($value) && intval($value, 10) > 0;
+              },
+            ],
+          ],
+        ],
       ]
     );
   }
@@ -320,13 +352,45 @@ class DataController
     }
   }
 
-  public function getImage(\WP_REST_Request $request)
-  {
-    $id = intval($request->get_param("id"), 10);
+  public function getImage(\WP_REST_Request $request) {
+    $id = intval($request->get_param('id'), 10);
 
     $image = DataModel::getItemImage($id);
-    $response = isset($image) ? ["success" => true, "image" => $image] : ["success" => false];
 
-    return new \WP_REST_Response($response);
+    if ($image === null) {
+      return new \WP_REST_Response([
+        'success' => false,
+        'message' => esc_html__(
+          'NinjaDraw image not found.',
+          'ninjadraw'
+        ),
+      ], 404);
+    }
+
+    return new \WP_REST_Response([
+      'success' => true,
+      'image' => $image,
+    ], 200);
+  }
+
+  public function getPresentation(\WP_REST_Request $request) {
+    $id = intval($request->get_param('id'), 10);
+
+    $presentation = DataModel::getItemPresentation($id);
+
+    if ($presentation === null) {
+      return new \WP_REST_Response([
+        'success' => false,
+        'message' => esc_html__(
+          'NinjaDraw presentation not found.',
+          'ninjadraw'
+        ),
+      ], 404);
+    }
+
+    return new \WP_REST_Response([
+      'success' => true,
+      'data' => $presentation,
+    ], 200);
   }
 }

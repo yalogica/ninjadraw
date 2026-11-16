@@ -1,14 +1,14 @@
 === NinjaDraw - Diagram, Flowchart, Mind Map & Sketching Tool === 
 Contributors: yalogica, freemius
-Tags: diagram, flowchart, mind map, whiteboard, svg map
+Tags: diagram, flowchart, mind map, whiteboard, presentation
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 1.5.3
+Stable tag: 1.6.1
 Requires PHP: 7.4
 License: GPLv3 
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Create diagrams, flowcharts, mindflow and hand-drawn sketches directly inside WordPress. NinjaDraw brings an intuitive whiteboard canvas to your page builder or block editor, turning complex text into visual workflows.
+Create diagrams, flowcharts, mind maps, animated presentations, and hand-drawn sketches directly inside WordPress with a responsive SVG player.
 
 == DESCRIPTION ==
 
@@ -30,6 +30,7 @@ Whether you're a blogger, educator, marketer, or developer, NinjaDraw empowers y
 
 === 🎯 Key Features ===
 * **Excalidraw Editor Integration** - intuitive hand-drawn style drawing tool.
+* **WordPress Presentation Builder** - turn diagram frames into responsive, animated presentation slides.
 * **Lightweight SVG Output** - optimized vector files for SEO and fast loading.
 * **WordPress Media Library Integration** - seamless image management inside the canvas.
 * **User-Friendly Interface** - create diagrams in seconds with zero learning curve.
@@ -39,6 +40,36 @@ Whether you're a blogger, educator, marketer, or developer, NinjaDraw empowers y
 * **100% GDPR-Compliant** - no data tracking or external servers, your sketches stay private.  
 * **Shortcode & Gutenberg Support** - embed diagrams anywhere using core Gutenberg blocks or shortcodes.   
 
+=== 🔥 WordPress Presentation and Slideshow Builder ===
+
+Turn your NinjaDraw diagrams into responsive **WordPress presentations**, **interactive slideshows**, and visual step-by-step guides. Each Excalidraw frame becomes an individual presentation slide that can be reordered directly in the NinjaDraw editor.
+
+Create animated presentations for educational content, product demonstrations, business processes, project plans, tutorials, visual stories, and interactive diagrams without relying on external presentation services.
+
+**Presentation features:**
+
+* **Frame-Based Slides** - convert Excalidraw frames into ordered presentation slides.
+* **Responsive SVG Presentation Player** - presentations remain sharp on desktop, tablet, mobile, and fullscreen displays.
+* **Slide Transitions** - choose between instant transitions, smooth panning, and animated effects.
+* **Entrance and Exit Animations** - configure separate show and hide animation effects.
+* **Loop Navigation** - automatically continue from the last slide to the first and from the first slide to the last.
+* **Frame Clipping** - hide diagram elements located outside the active slide frame.
+* **Fullscreen Presentation Mode** - present diagrams using a distraction-free fullscreen player.
+* **Keyboard Navigation** - move between slides with arrow keys, Page Up, Page Down, Home, End, and Space.
+* **Self-Hosted and Privacy-Friendly** - SVG files and presentation data remain on your WordPress website.
+* **Lightweight Frontend Player** - the full diagram editor is not loaded on public pages.
+
+Embed a presentation in Gutenberg, the Classic Editor, Elementor, Divi, or any WordPress page builder that supports shortcodes:
+
+`[ninjadraw id="123" type="presentation" width="100%" height="600px"]`
+
+Optional presentation attributes include:
+
+* `title="true"` - display the NinjaDraw item title.
+* `class="my-presentation"` - add a custom CSS class.
+* `width="100%"` - configure the presentation width.
+* `height="600px"` - configure the presentation height.
+
 
 **NinjaDraw Free** - General Features
 ✅ **Unlimited Diagrams**
@@ -47,13 +78,16 @@ Whether you're a blogger, educator, marketer, or developer, NinjaDraw empowers y
 
 
 **NinjaDraw Pro** includes everything from Free, plus:
-✅✨ **Image Canvas Support** - insert images from WordPress Media Library
-✅✨ **Open & Edit Native Files:** import and edit .excalidraw files directly
-✅✨ **Frame tool** - group and organize elements into clean layout frames
-✅✨ **Layout Frame Tool** - group, section, and organize elements into clean mockup frames
-✅✨ **Interactive Web Embeds** - easily embed external interactive web content into diagrams
-✅✨ **Laser Pointer Tool** - highlight elements in real-time during live presentations
-✅✨ **Mermaid Import** - instantly convert text scripts and code into flowcharts
+✅✨ **Image Canvas Support** - insert images from the WordPress Media Library.
+✅✨ **Open & Edit Native Files** - import and edit .excalidraw files directly.
+✅✨ **Frame Tool** - group and organize diagram elements into structured frames.
+✅✨ **WordPress Presentation Builder** - turn Excalidraw frames into ordered, responsive presentation slides.
+✅✨ **Presentation Transitions & Animations** - use smooth pan transitions and configurable entrance and exit effects.
+✅✨ **Fullscreen SVG Presentation Player** - present diagrams with keyboard navigation, looping, frame clipping, and fullscreen mode.
+✅✨ **Layout Frame Tool** - group, section, and organize elements into clean mockup frames.
+✅✨ **Interactive Web Embeds** - embed external interactive web content into diagrams.
+✅✨ **Laser Pointer Tool** - highlight elements during live presentations.
+✅✨ **Mermaid Import** - instantly convert text scripts and code into flowcharts.
 
 
 === ✨ How to Create Diagrams & Mind Maps in WordPress ===
@@ -121,6 +155,13 @@ Yes! We don't collect, store, or track user data and drawings without consent. E
 
 
 == Changelog ==
+
+= 1.6.1 =
+* Fixed: Opening or closing the Presentation panel no longer remounts the editor and causes unsaved canvas content to disappear
+
+= 1.6.0 =
+* Added: Presentation builder for turning Excalidraw frames into ordered presentation slides
+* Added: Responsive SVG presentation player with fullscreen and keyboard navigation
 
 = 1.5.3 =
 * Fixed: Canvas background color was not included in the generated SVG, resulting in a transparent background on the frontend

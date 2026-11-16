@@ -16,8 +16,9 @@ class DataModel
   public const META_ROLE = '_ninjadraw_role';
   public const META_FILES = '_ninjadraw_files';
   public const META_SVG_IMAGE = '_ninjadraw_svg';
+  public const META_PRESENTATION = '_ninjadraw_presentation';
 
-  public static function getSup() 
+  public static function getSup()
   {
     return 'lite';
   }
@@ -395,28 +396,31 @@ class DataModel
 
     switch ($permissionType) {
       case AccessModel::ACCESS_TYPE_EDIT_ALL: {
-        return AccessModel::currentUserCan($right);
-      } break;
+          return AccessModel::currentUserCan($right);
+        }
+        break;
       case AccessModel::ACCESS_TYPE_EDIT_BY_ROLE: {
-        $role = get_post_meta($post_id, self::META_ROLE, true);
-        if ($role === AccessModel::getCurrentUserRole()) {
-          return AccessModel::currentUserCan($right);
+          $role = get_post_meta($post_id, self::META_ROLE, true);
+          if ($role === AccessModel::getCurrentUserRole()) {
+            return AccessModel::currentUserCan($right);
+          }
         }
-      } break;
+        break;
       case AccessModel::ACCESS_TYPE_EDIT_PRIVATE: {
-        $post = get_post($post_id);
-        if (!$post) {
-          return false;
+          $post = get_post($post_id);
+          if (!$post) {
+            return false;
+          }
+          if ((int) $post->post_author === get_current_user_id()) {
+            return AccessModel::currentUserCan($right);
+          }
         }
-        if ((int) $post->post_author === get_current_user_id()) {
-          return AccessModel::currentUserCan($right);
-        }
-      } break;
+        break;
     }
 
     return false;
   }
-  
+
   public static function getItem($id)
   {
     $post = get_post($id);
@@ -432,7 +436,7 @@ class DataModel
       $data['role'] = translate_user_role(get_post_meta($id, self::META_ROLE, true));
       $data['created'] = $post->post_date;
       $data['edited'] = $post->post_modified;
-      
+
       return $data;
     }
     return null;
@@ -459,12 +463,147 @@ class DataModel
     return null;
   }
 
+  private static function preparePresentationForStorage($data)
+  {
+    if (is_string($data)) {
+      $presentation = json_decode($data, true);
+
+      if (json_last_error() !== JSON_ERROR_NONE) {
+        return null;
+      }
+    } elseif (is_array($data)) {
+      $presentation = $data;
+    } else {
+      return null;
+    }
+
+    if (
+      !is_array($presentation) ||
+      !isset($presentation['version']) ||
+      intval($presentation['version'], 10) !== 1 ||
+      !isset($presentation['scene']) ||
+      !is_array($presentation['scene']) ||
+      !isset($presentation['padding']) ||
+      !is_array($presentation['padding']) ||
+      !isset($presentation['transition']) ||
+      !is_array($presentation['transition']) ||
+      !isset($presentation['slides']) ||
+      !is_array($presentation['slides'])
+    ) {
+      return null;
+    }
+
+    if (
+      array_key_exists('loop', $presentation) &&
+      !is_bool($presentation['loop'])
+    ) {
+      return null;
+    }
+
+    if (
+      array_key_exists('clip', $presentation) &&
+      !is_bool($presentation['clip'])
+    ) {
+      return null;
+    }
+
+    $scene_width = $presentation['scene']['width'] ?? 0;
+    $scene_height = $presentation['scene']['height'] ?? 0;
+
+    if (
+      !is_numeric($scene_width) ||
+      !is_numeric($scene_height) ||
+      floatval($scene_width) <= 0 ||
+      floatval($scene_height) <= 0
+    ) {
+      return null;
+    }
+
+    foreach (
+      ['top', 'right', 'bottom', 'left']
+      as $padding_key
+    ) {
+      if (
+        !isset($presentation['padding'][$padding_key]) ||
+        !is_numeric($presentation['padding'][$padding_key]) ||
+        floatval($presentation['padding'][$padding_key]) < 0
+      ) {
+        return null;
+      }
+    }
+
+    $transition = $presentation['transition'];
+
+    if (
+      !isset($transition['type']) ||
+      !in_array($transition['type'], ['none', 'pan', 'animation'], true) ||
+      !isset($transition['duration']) ||
+      !is_numeric($transition['duration']) ||
+      floatval($transition['duration']) < 0 ||
+      !isset($transition['easing']) ||
+      !is_string($transition['easing']) ||
+      trim($transition['easing']) === ''
+    ) {
+      return null;
+    }
+
+    foreach ($presentation['slides'] as $slide) {
+      if (
+        !is_array($slide) ||
+        empty($slide['id']) ||
+        !is_string($slide['id']) ||
+        !isset(
+          $slide['x'],
+          $slide['y'],
+          $slide['width'],
+          $slide['height']
+        ) ||
+        !is_numeric($slide['x']) ||
+        !is_numeric($slide['y']) ||
+        !is_numeric($slide['width']) ||
+        !is_numeric($slide['height']) ||
+        floatval($slide['width']) <= 0 ||
+        floatval($slide['height']) <= 0
+      ) {
+        return null;
+      }
+
+      if (
+        array_key_exists('title', $slide) &&
+        $slide['title'] !== null &&
+        !is_string($slide['title'])
+      ) {
+        return null;
+      }
+    }
+
+    $json = wp_json_encode(
+      $presentation,
+      JSON_UNESCAPED_UNICODE |
+      JSON_UNESCAPED_SLASHES
+    );
+
+    if ($json === false) {
+      return null;
+    }
+
+    return wp_slash($json);
+  }
+
   public static function createItem($data)
   {
     if (is_array($data) && AccessModel::currentUserCan([AccessModel::ACCESS_RIGHT_CREATE, AccessModel::ACCESS_RIGHT_EDIT])) {
       $config = wp_slash(json_encode($data['source'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
       if ($config === false) {
         return null;
+      }
+      
+      $presentation = null;
+      if (array_key_exists('presentation', $data)) {
+        $presentation = self::preparePresentationForStorage($data['presentation']);
+        if ($presentation === null) {
+          return null;
+        }
       }
 
       $post = [
@@ -474,12 +613,15 @@ class DataModel
         'post_mime_type' => 'application/json',
         'post_title' => isset($data['title']) ? sanitize_text_field($data['title']) : '',
         'post_content' => $config,
-        'meta_input' => [
+        'meta_input' => array_filter([
           self::META_EDITED_BY => get_current_user_id(),
           self::META_ROLE => AccessModel::getCurrentUserRole(),
           self::META_FILES => wp_slash($data['files']),
           self::META_SVG_IMAGE => wp_slash($data['svg']),
-        ]
+          self::META_PRESENTATION => $presentation,
+        ], static function ($value) {
+          return $value !== null;
+        })
       ];
       $post_id = wp_insert_post($post);
 
@@ -489,7 +631,7 @@ class DataModel
     }
     return null;
   }
-
+  
   public static function trashItem($id)
   {
     if (self::currentUserCan($id, AccessModel::ACCESS_RIGHT_DELETE)) {
@@ -516,7 +658,7 @@ class DataModel
 
   public static function deleteItem($id)
   {
-     if (!self::currentUserCan($id, AccessModel::ACCESS_RIGHT_DELETE)) {
+    if (!self::currentUserCan($id, AccessModel::ACCESS_RIGHT_DELETE)) {
       return false;
     }
 
@@ -550,7 +692,7 @@ class DataModel
     }
 
     $title = $source->post_title . (stripos($source->post_title, '[Copy]') ? '' : ' [Copy]');
-    
+
     $post = [
       'post_type' => self::POST_TYPE,
       'post_name' => uniqid(),
@@ -590,18 +732,29 @@ class DataModel
     }
 
     if (is_array($data) && self::currentUserCan($id, AccessModel::ACCESS_RIGHT_EDIT)) {
+      $presentation = null;
+      if (array_key_exists('presentation', $data)) {
+        $presentation = self::preparePresentationForStorage($data['presentation']);
+        if ($presentation === null) {
+          return false;
+        }
+      }
+
       $post = [
         'ID' => $id,
         'post_mime_type' => 'application/json',
         'post_title' => sanitize_text_field($data['title']),
         'post_content' => wp_slash($data['source']),
-        'meta_input' => [
+        'meta_input' => array_filter([
           self::META_EDITED_BY => get_current_user_id(),
           self::META_FILES => wp_slash($data['files']),
-          self::META_SVG_IMAGE => wp_slash($data['svg'])
-        ]
+          self::META_SVG_IMAGE => wp_slash($data['svg']),
+          self::META_PRESENTATION => $presentation,
+        ], static function ($value) {
+          return $value !== null;
+        })
       ];
-      
+
       if (in_array($data['status'], [self::POST_STATUS_AUTO_DRAFT])) {
         $post['post_status'] = self::POST_STATUS_DRAFT;
       }
@@ -651,5 +804,32 @@ class DataModel
     }
 
     return null;
+  }
+
+  public static function getItemPresentation($id)
+  {
+    $post = get_post($id);
+
+    if (!$post || $post->post_type !== self::POST_TYPE || $post->post_status !== self::POST_STATUS_PUBLISHED) {
+      return null;
+    }
+
+    $svg = get_post_meta($id, self::META_SVG_IMAGE, true);
+    $manifest_json = get_post_meta($id, self::META_PRESENTATION, true);
+
+    if (empty($svg) || empty($manifest_json)) {
+      return null;
+    }
+
+    $presentation = json_decode($manifest_json, true);
+
+    if (json_last_error() !== JSON_ERROR_NONE || !is_array($presentation)) {
+      return null;
+    }
+
+    return [
+      'svg' => $svg,
+      'presentation' => $presentation,
+    ];
   }
 }
