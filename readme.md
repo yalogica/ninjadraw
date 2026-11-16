@@ -2,7 +2,7 @@
 
 Create flowcharts, diagrams, wireframes, and hand-drawn sketches directly inside WordPress. NinjaDraw brings an intuitive Excalidraw-powered whiteboard canvas to your block editor, turning complex ideas into visual workflows.
 
-![NinjaDraw - WordPress diagram and whiteboard tool](./assets/screenshot.jpg)
+![NinjaDraw - WordPress diagram and whiteboard tool](./assets/wordpress-excalidraw-diagram-builder.jpg)
 
 ## About this repository
 
@@ -27,7 +27,22 @@ NinjaDraw is a WordPress plugin that adds a hand-drawn style diagram editor base
 - Responsive, SEO-friendly lightweight SVG output
 - 100% GDPR-compliant, no tracking or external servers
 
-**NinjaDraw Pro** adds image canvas support (insert images from the WordPress Media Library), native .excalidraw file import and editing, the frame tool for grouping elements into clean layout frames, interactive web embeds, the laser pointer tool for live presentations, Mermaid import to turn text scripts into flowcharts, plus global settings and user permissions to manage your whole team.
+
+Также текущий Pro-абзац можно обновить:
+
+**NinjaDraw Pro** adds image canvas support, native .excalidraw file import and editing, the frame tool, a responsive WordPress presentation builder with transitions and animations, interactive web embeds, the laser pointer tool, Mermaid import, plus global settings and user permissions.
+
+### Create presentations in WordPress
+
+**NinjaDraw Pro** turns Excalidraw frames into responsive presentation slides directly inside WordPress. Arrange slides with drag and drop, configure transitions and entrance/exit animations, enable looping and frame clipping, and present diagrams using fullscreen mode and keyboard navigation.
+
+![NinjaDraw - WordPress diagram & presentation builder](./assets/wordpress-excalidraw-presentaion-builder.jpg)
+
+Presentations can be embedded in posts, pages, widgets, and page builders using a configurable shortcode:
+
+```text
+[ninjadraw id="123" type="presentation" width="100%" height="600px"]
+```
 
 ## Installation
 
